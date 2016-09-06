@@ -1,0 +1,13 @@
+*.log
+*.tmp
+logs/
+
+#IntelliJIDEA files
+.idea/
+*.iml
+
+#Maven builds
+target/
+
+#Mac OS files
+.DS_Store
