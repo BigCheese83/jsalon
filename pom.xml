@@ -12,14 +12,18 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <modules>
+        <module>pg-migration</module>
+    </modules>
+
     <profiles>
         <profile>
-            <id>db-migration</id>
+            <id>jdbc</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <modules>
-                <module>pg-migration</module>
+                <module>model-plain</module>
             </modules>
         </profile>
     </profiles>
