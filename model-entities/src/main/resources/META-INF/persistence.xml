@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+    <persistence-unit name="salon_PU" transaction-type="JTA">
+        <jta-data-source>jdbc/salon</jta-data-source>
+        <class>ru.bigcheese.jsalon.model.convert.LocalDateAttributeConverter</class>
+        <class>ru.bigcheese.jsalon.model.convert.LocalDateTimeAttributeConverter</class>
+        <class>ru.bigcheese.jsalon.model.convert.LocalTimeAttributeConverter</class>
+        <class>ru.bigcheese.jsalon.model.BaseModel</class>
+        <class>ru.bigcheese.jsalon.model.Address</class>
+        <class>ru.bigcheese.jsalon.model.Client</class>
+        <class>ru.bigcheese.jsalon.model.Contact</class>
+        <class>ru.bigcheese.jsalon.model.Discount</class>
+        <class>ru.bigcheese.jsalon.model.Master</class>
+        <class>ru.bigcheese.jsalon.model.Passport</class>
+        <class>ru.bigcheese.jsalon.model.Person</class>
+        <class>ru.bigcheese.jsalon.model.Post</class>
+        <class>ru.bigcheese.jsalon.model.ScheduleEntry</class>
+        <class>ru.bigcheese.jsalon.model.Service</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="eclipselink.target-database" value="PostgreSQL"/>
+            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
+            <property name="eclipselink.weaving" value="static"/>
+        </properties>
+    </persistence-unit>
+</persistence>

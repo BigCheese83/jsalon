@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>parent</artifactId>
+        <groupId>ru.bigcheese.jsalon</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>jsalon-model-entities</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.glassfish.main.extras</groupId>
+            <artifactId>glassfish-embedded-all</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>eclipselink-staticweave-maven-plugin</artifactId>
+                <groupId>au.com.alderaan</groupId>
+                <version>1.0.4</version>
+                <executions>
+                    <execution>
+                        <id>weaving</id>
+                        <goals>
+                            <goal>weave</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                        <configuration>
+                            <logLevel>ALL</logLevel>
+                            <includeProjectClasspath>true</includeProjectClasspath>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test-weaving</id>
+                        <goals>
+                            <goal>weave</goal>
+                        </goals>
+                        <phase>process-test-classes</phase>
+                        <configuration>
+                            <logLevel>ALL</logLevel>
+                            <includeProjectClasspath>true</includeProjectClasspath>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.eclipse.persistence</groupId>
+                        <artifactId>eclipselink</artifactId>
+                        <version>2.6.1-RC1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>

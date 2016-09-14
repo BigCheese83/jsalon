@@ -18,6 +18,15 @@
 
     <profiles>
         <profile>
+            <id>jpa</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>model-entities</module>
+            </modules>
+        </profile>
+        <profile>
             <id>jdbc</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
@@ -30,6 +39,22 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>ru.bigcheese.jsalon</groupId>
+                <artifactId>jsalon-model-plain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ru.bigcheese.jsalon</groupId>
+                <artifactId>jsalon-model-entities</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.main.extras</groupId>
+                <artifactId>glassfish-embedded-all</artifactId>
+                <version>4.1.1</version>
+                <scope>provided</scope>
+            </dependency>
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
