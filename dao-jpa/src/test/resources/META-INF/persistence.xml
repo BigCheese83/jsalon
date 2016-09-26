@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+    <persistence-unit name="salon_PU_test">
+        <jta-data-source>jdbc/jsalon-dao-arquillian</jta-data-source>
+        <class>ru.bigcheese.jsalon.model.convert.LocalDateAttributeConverter</class>
+        <class>ru.bigcheese.jsalon.model.convert.LocalDateTimeAttributeConverter</class>
+        <class>ru.bigcheese.jsalon.model.convert.LocalTimeAttributeConverter</class>
+        <class>ru.bigcheese.jsalon.model.BaseModel</class>
+        <class>ru.bigcheese.jsalon.model.Address</class>
+        <class>ru.bigcheese.jsalon.model.Client</class>
+        <class>ru.bigcheese.jsalon.model.Contact</class>
+        <class>ru.bigcheese.jsalon.model.Discount</class>
+        <class>ru.bigcheese.jsalon.model.Master</class>
+        <class>ru.bigcheese.jsalon.model.Passport</class>
+        <class>ru.bigcheese.jsalon.model.Person</class>
+        <class>ru.bigcheese.jsalon.model.Post</class>
+        <class>ru.bigcheese.jsalon.model.ScheduleEntry</class>
+        <class>ru.bigcheese.jsalon.model.Service</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <!--<property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>-->
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test;MODE=PostgreSQL"/>-->
+            <!--<property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>-->
+            <!--<property name="javax.persistence.schema-generation.scripts.create-target" value="create.ddl"/>-->
+            <!--<property name="javax.persistence.schema-generation.scripts.drop-target" value="drop.ddl"/>-->
+            <property name="eclipselink.target-database" value="org.eclipse.persistence.platform.database.H2Platform"/>
+            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
+            <property name="eclipselink.weaving" value="static"/>
+        </properties>
+    </persistence-unit>
+</persistence>
