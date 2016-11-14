@@ -34,6 +34,7 @@
             </activation>
             <modules>
                 <module>model-plain</module>
+                <module>dao-jdbc</module>
             </modules>
         </profile>
     </profiles>
