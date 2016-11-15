@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create_table_users" author="bigcheese">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="users"/>
+            </not>
+        </preConditions>
+        <sql splitStatements="true" stripComments="true">
+            <![CDATA[
+                CREATE TABLE users (
+                    id bigserial NOT NULL PRIMARY KEY,
+                    created timestamp without time zone,
+                    modified timestamp without time zone,
+                    version integer NOT NULL,
+                    username character varying NOT NULL,
+                    surname character varying,
+                    name character varying,
+                    patronymic character varying,
+                    password character varying(32) NOT NULL
+                );
+                ALTER TABLE ONLY users ADD CONSTRAINT users_username_key UNIQUE (username);
+            ]]>
+        </sql>
+        <rollback/>
+    </changeSet>
+</databaseChangeLog>

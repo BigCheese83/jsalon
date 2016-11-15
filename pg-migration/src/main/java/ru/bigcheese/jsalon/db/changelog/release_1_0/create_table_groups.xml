@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create_table_groups" author="bigcheese">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="groups"/>
+            </not>
+        </preConditions>
+        <sql splitStatements="true" stripComments="true">
+            <![CDATA[
+                CREATE TABLE groups (
+                    id bigserial NOT NULL PRIMARY KEY,
+                    created timestamp without time zone,
+                    modified timestamp without time zone,
+                    version integer NOT NULL,
+                    groupname character varying NOT NULL,
+                    description character varying
+                );
+                ALTER TABLE ONLY groups ADD CONSTRAINT groups_groupname_key UNIQUE (groupname);
+            ]]>
+        </sql>
+        <rollback/>
+    </changeSet>
+</databaseChangeLog>

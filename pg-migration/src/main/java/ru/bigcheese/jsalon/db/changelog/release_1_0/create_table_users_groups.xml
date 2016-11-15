@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create_table_users_groups" author="bigcheese">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="users"/>
+            <tableExists tableName="groups"/>
+        </preConditions>
+        <sql splitStatements="true" stripComments="true">
+            <![CDATA[
+                CREATE TABLE users_groups (
+                    user_id bigint NOT NULL,
+                    group_id bigint NOT NULL,
+                    PRIMARY KEY (user_id, group_id),
+                    FOREIGN KEY (user_id) REFERENCES users (id),
+                    FOREIGN KEY (group_id) REFERENCES groups (id)
+                );
+            ]]>
+        </sql>
+        <rollback/>
+    </changeSet>
+</databaseChangeLog>

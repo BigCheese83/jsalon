@@ -14,6 +14,12 @@
                  stripComments="true"/>
     </changeSet>
 
+    <include file="ru/bigcheese/jsalon/db/changelog/release_1_0/create_table_users.xml"/>
+    <include file="ru/bigcheese/jsalon/db/changelog/release_1_0/create_table_groups.xml"/>
+    <include file="ru/bigcheese/jsalon/db/changelog/release_1_0/create_table_users_groups.xml"/>
+    <include file="ru/bigcheese/jsalon/db/changelog/release_1_0/create_v_user_role_view.xml"/>
+    <include file="ru/bigcheese/jsalon/db/changelog/release_1_0/add_admin_user.xml"/>
+
     <changeSet id="tag_1.0" author="bigcheese">
         <tagDatabase tag="version_1.0"/>
     </changeSet>

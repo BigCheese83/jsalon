@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create_v_user_role_view" author="bigcheese">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <viewExists viewName="v_user_role"/>
+            </not>
+        </preConditions>
+        <sql splitStatements="true" stripComments="true">
+            <![CDATA[
+                CREATE VIEW v_user_role AS
+                    SELECT u.username, u.password, g.groupname as role
+                    FROM users_groups ug
+                        JOIN users u ON u.id = ug.user_id
+                        JOIN groups g ON g.id =  ug.group_id;
+            ]]>
+        </sql>
+        <rollback/>
+    </changeSet>
+</databaseChangeLog>
