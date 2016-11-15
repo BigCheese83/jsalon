@@ -1,7 +1,6 @@
 package ru.bigcheese.jsalon.model;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,7 +10,7 @@ public class Service extends BaseModel {
     private BigDecimal cost;
     private Integer duration;
     private String description;
-    private Set<Post> posts = new HashSet<>();
+    private Set<Post> posts;
 
     public String getName() {
         return name;

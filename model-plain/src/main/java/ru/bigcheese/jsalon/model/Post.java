@@ -1,6 +1,5 @@
 package ru.bigcheese.jsalon.model;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -8,7 +7,7 @@ public class Post extends BaseModel {
 
     private String name;
     private String description;
-    private Set<Service> services = new HashSet<>();
+    private Set<Service> services;
 
     public String getName() {
         return name;

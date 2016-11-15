@@ -18,8 +18,8 @@ public class Master extends BaseModel {
         return super.getId();
     }
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "person_id", nullable = false)
+    @OneToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "person_id", nullable = false, updatable = false)
     public Person getPerson() {
         return person;
     }

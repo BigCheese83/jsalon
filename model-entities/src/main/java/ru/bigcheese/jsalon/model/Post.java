@@ -55,6 +55,13 @@ public class Post extends BaseModel {
         this.services = services;
     }
 
+    public void addService(Service service) {
+        services.add(service);
+        if (!service.getPosts().contains(this)) {
+            service.getPosts().add(this);
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
