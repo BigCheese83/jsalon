@@ -16,6 +16,8 @@
         <class>ru.bigcheese.jsalon.model.Post</class>
         <class>ru.bigcheese.jsalon.model.ScheduleEntry</class>
         <class>ru.bigcheese.jsalon.model.Service</class>
+        <class>ru.bigcheese.jsalon.model.Group</class>
+        <class>ru.bigcheese.jsalon.model.User</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="eclipselink.target-database" value="PostgreSQL"/>
