@@ -1,0 +1,1 @@
+Copy this files to %GLASSFISH_PATH%\glassfish\domains\domain1\lib
