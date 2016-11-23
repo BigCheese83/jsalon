@@ -1,7 +1,7 @@
 package ru.bigcheese.jsalon.dao;
 
 import com.google.common.collect.ImmutableMap;
-import ru.bigcheese.jsalon.dao.exception.OptimisticLockException;
+import ru.bigcheese.jsalon.core.exception.OptimisticLockException;
 import ru.bigcheese.jsalon.dao.mapper.RowMapper;
 import ru.bigcheese.jsalon.dao.mapper.ServiceMapper;
 import ru.bigcheese.jsalon.model.Post;

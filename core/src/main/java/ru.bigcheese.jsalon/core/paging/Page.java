@@ -1,4 +1,4 @@
-package ru.bigcheese.jsalon.dao.paging;
+package ru.bigcheese.jsalon.core.paging;
 
 import java.io.Serializable;
 import java.util.List;

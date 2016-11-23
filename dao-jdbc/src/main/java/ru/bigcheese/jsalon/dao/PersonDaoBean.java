@@ -1,11 +1,10 @@
 package ru.bigcheese.jsalon.dao;
 
 import com.google.common.collect.ImmutableMap;
-import ru.bigcheese.jsalon.dao.exception.DatabaseException;
-import ru.bigcheese.jsalon.dao.exception.OptimisticLockException;
+import ru.bigcheese.jsalon.core.exception.DatabaseException;
+import ru.bigcheese.jsalon.core.exception.OptimisticLockException;
 import ru.bigcheese.jsalon.dao.mapper.PersonMapper;
 import ru.bigcheese.jsalon.dao.mapper.RowMapper;
-import ru.bigcheese.jsalon.model.Contact;
 import ru.bigcheese.jsalon.model.Person;
 
 import javax.ejb.Stateless;

@@ -14,34 +14,21 @@
 
     <modules>
         <module>pg-migration</module>
+        <module>core</module>
+        <module>model-entities</module>
+        <module>dao-jpa</module>
+        <module>model-plain</module>
+        <module>dao-jdbc</module>
     </modules>
-
-    <profiles>
-        <profile>
-            <id>jpa</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>model-entities</module>
-                <module>dao-jpa</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>jdbc</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <modules>
-                <module>model-plain</module>
-                <module>dao-jdbc</module>
-            </modules>
-        </profile>
-    </profiles>
 
     <dependencyManagement>
         <dependencies>
             <!-- jsalon dependencies -->
+            <dependency>
+                <groupId>ru.bigcheese.jsalon</groupId>
+                <artifactId>jsalon-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>ru.bigcheese.jsalon</groupId>
                 <artifactId>jsalon-model-plain</artifactId>
@@ -55,6 +42,11 @@
             <dependency>
                 <groupId>ru.bigcheese.jsalon</groupId>
                 <artifactId>jsalon-dao-jpa</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ru.bigcheese.jsalon</groupId>
+                <artifactId>jsalon-dao-jdbc</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- provided scope dependencies -->

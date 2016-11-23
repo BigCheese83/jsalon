@@ -1,4 +1,4 @@
-package ru.bigcheese.jsalon.dao.exception;
+package ru.bigcheese.jsalon.core.exception;
 
 public class OptimisticLockException extends RuntimeException {
 

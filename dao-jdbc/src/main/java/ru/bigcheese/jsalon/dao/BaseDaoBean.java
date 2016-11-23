@@ -1,8 +1,8 @@
 package ru.bigcheese.jsalon.dao;
 
-import ru.bigcheese.jsalon.dao.exception.DatabaseException;
-import ru.bigcheese.jsalon.dao.paging.Page;
-import ru.bigcheese.jsalon.dao.paging.PageRequest;
+import ru.bigcheese.jsalon.core.exception.DatabaseException;
+import ru.bigcheese.jsalon.core.paging.Page;
+import ru.bigcheese.jsalon.core.paging.PageRequest;
 import ru.bigcheese.jsalon.dao.support.NullParam;
 import ru.bigcheese.jsalon.dao.mapper.RowMapper;
 import ru.bigcheese.jsalon.model.BaseModel;

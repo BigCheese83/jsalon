@@ -1,7 +1,7 @@
 package ru.bigcheese.jsalon.dao;
 
-import ru.bigcheese.jsalon.dao.paging.Page;
-import ru.bigcheese.jsalon.dao.paging.PageRequest;
+import ru.bigcheese.jsalon.core.paging.Page;
+import ru.bigcheese.jsalon.core.paging.PageRequest;
 import ru.bigcheese.jsalon.model.BaseModel;
 
 import java.util.List;

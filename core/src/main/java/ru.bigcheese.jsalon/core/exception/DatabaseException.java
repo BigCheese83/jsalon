@@ -1,4 +1,4 @@
-package ru.bigcheese.jsalon.dao.exception;
+package ru.bigcheese.jsalon.core.exception;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
