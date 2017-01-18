@@ -1,12 +1,14 @@
 package ru.bigcheese.jsalon.model;
 
+import ru.bigcheese.jsalon.model.enums.GroupName;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "groups", uniqueConstraints = { @UniqueConstraint(columnNames = "groupname") })
 public class Group extends BaseModel {
 
-    private String name;
+    private GroupName name;
     private String description;
 
     @Id
@@ -16,12 +18,13 @@ public class Group extends BaseModel {
         return super.getId();
     }
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "groupname", nullable = false)
-    public String getName() {
+    public GroupName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(GroupName name) {
         this.name = name;
     }
 
@@ -36,25 +39,25 @@ public class Group extends BaseModel {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Group)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
         Group group = (Group) o;
 
-        return getName() != null ? getName().equals(group.getName()) : group.getName() == null;
+        return name == group.name;
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "Group{" +
-                "name='" + name + '\'' +
+                "name=" + name +
                 ", description='" + description + '\'' +
                 '}';
     }

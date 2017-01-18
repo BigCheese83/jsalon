@@ -1,6 +1,7 @@
 package ru.bigcheese.jsalon.dao.mapper;
 
 import ru.bigcheese.jsalon.model.Group;
+import ru.bigcheese.jsalon.model.enums.GroupName;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ public class GroupMapper extends AbstractRowMapper<Group> {
         group.setCreated(toDateTime(rs.getTimestamp(get("created"))));
         group.setModified(toDateTime(rs.getTimestamp(get("modified"))));
         group.setVersion(rs.getInt(get("version")));
-        group.setName(rs.getString("groupname"));
+        group.setName(GroupName.value(rs.getString("groupname")));
         group.setDescription(rs.getString("description"));
         return group;
     }

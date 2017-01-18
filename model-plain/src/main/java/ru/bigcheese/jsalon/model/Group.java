@@ -1,15 +1,17 @@
 package ru.bigcheese.jsalon.model;
 
+import ru.bigcheese.jsalon.model.enums.GroupName;
+
 public class Group extends BaseModel {
 
-    private String name;
+    private GroupName name;
     private String description;
 
-    public String getName() {
+    public GroupName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(GroupName name) {
         this.name = name;
     }
 
@@ -24,13 +26,12 @@ public class Group extends BaseModel {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Group)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
         Group group = (Group) o;
 
-        return name != null ? name.equals(group.name) : group.name == null;
-
+        return name == group.name;
     }
 
     @Override
@@ -43,7 +44,7 @@ public class Group extends BaseModel {
     @Override
     public String toString() {
         return "Group{" +
-                "name='" + name + '\'' +
+                "name=" + name +
                 ", description='" + description + '\'' +
                 '}';
     }

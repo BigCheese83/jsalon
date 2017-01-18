@@ -178,7 +178,9 @@ public abstract class BaseDaoBean<T extends BaseModel> implements BaseDao<T> {
             } else if (param instanceof LocalDateTime) {
                 pstm.setTimestamp(pos++, java.sql.Timestamp.valueOf((LocalDateTime)param));
             } else if (param instanceof LocalTime) {
-                pstm.setTime(pos++, java.sql.Time.valueOf((LocalTime)param));
+                pstm.setTime(pos++, java.sql.Time.valueOf((LocalTime) param));
+            } else if (param instanceof Enum) {
+                pstm.setString(pos++, ((Enum)param).name());
             } else if (param instanceof BigDecimal) {
                 pstm.setBigDecimal(pos++, (BigDecimal) param);
             } else if (param instanceof Boolean) {

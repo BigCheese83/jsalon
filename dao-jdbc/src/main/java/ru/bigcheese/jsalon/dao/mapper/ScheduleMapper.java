@@ -74,8 +74,7 @@ public class ScheduleMapper extends AbstractRowMapper<ScheduleEntry> {
         schedule.setSurname(rs.getString(get("surname")));
         schedule.setName(rs.getString(get("name")));
         schedule.setPhone(rs.getString(get("phone")));
-        String status = rs.getString(get("status"));
-        schedule.setStatus(status != null ? ScheduleEntryStatus.valueOf(status) : null);
+        schedule.setStatus(ScheduleEntryStatus.value(rs.getString(get("status"))));
         schedule.setNote(rs.getString("note"));
         long masterId = rs.getLong(masterMapper.get("id"));
         if (masterId > 0) {
