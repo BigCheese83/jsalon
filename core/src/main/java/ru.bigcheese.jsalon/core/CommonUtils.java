@@ -24,4 +24,17 @@ public final class CommonUtils {
         }
         return sb.toString();
     }
+
+    public static String getShortFIO(String surname, String name, String patronymic) {
+        final String[] fio = new String[] { surname, name, patronymic };
+        StringBuilder sb = new StringBuilder();
+        boolean fullName = true;
+        for (String s : fio) {
+            if (s != null && !s.isEmpty()) {
+                sb.append(fullName ? s + " " : Character.toUpperCase(s.charAt(0)) + ".");
+                fullName = false;
+            }
+        }
+        return sb.toString().trim();
+    }
 }

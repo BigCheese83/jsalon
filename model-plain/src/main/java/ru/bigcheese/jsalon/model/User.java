@@ -1,5 +1,7 @@
 package ru.bigcheese.jsalon.model;
 
+import ru.bigcheese.jsalon.core.CommonUtils;
+
 public class User extends BaseModel {
 
     private String username;
@@ -46,6 +48,10 @@ public class User extends BaseModel {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public String getShortFIO() {
+        return CommonUtils.getShortFIO(surname, name, patronymic);
     }
 
     @Override

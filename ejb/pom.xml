@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>parent</artifactId>
+        <groupId>ru.bigcheese.jsalon</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>jsalon-ejb</artifactId>
+    <packaging>ejb</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.glassfish.main.extras</groupId>
+            <artifactId>glassfish-embedded-all</artifactId>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>jpa</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>dao</name>
+                    <value>jpa</value>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>ru.bigcheese.jsalon</groupId>
+                    <artifactId>jsalon-dao-jpa</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>jdbc</id>
+            <activation>
+                <property>
+                    <name>dao</name>
+                    <value>jdbc</value>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>ru.bigcheese.jsalon</groupId>
+                    <artifactId>jsalon-dao-jdbc</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ejb-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

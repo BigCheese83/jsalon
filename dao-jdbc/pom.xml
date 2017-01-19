@@ -17,14 +17,6 @@
             <artifactId>jsalon-model-plain</artifactId>
         </dependency>
         <dependency>
-            <groupId>ru.bigcheese.jsalon</groupId>
-            <artifactId>jsalon-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.glassfish.main.extras</groupId>
             <artifactId>glassfish-embedded-all</artifactId>
         </dependency>

@@ -1,5 +1,7 @@
 package ru.bigcheese.jsalon.model;
 
+import ru.bigcheese.jsalon.core.CommonUtils;
+
 import javax.persistence.*;
 
 @Entity
@@ -68,6 +70,11 @@ public class User extends BaseModel {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    @Transient
+    public String getShortFIO() {
+        return CommonUtils.getShortFIO(surname, name, patronymic);
     }
 
     @Override

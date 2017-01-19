@@ -1,0 +1,239 @@
+html, body {
+    -webkit-tap-highlight-color: transparent; /* disable webkit tap highlight */
+    overflow: hidden;
+}
+
+body {
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#header {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    text-align: center;
+    z-index: 9998;
+    color: #2779aa;
+    width: 100%;
+    height: 55px;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+#header .col-3,
+#header .col-4,
+#header .col-8,
+#header .col-9 {
+    vertical-align: middle;
+}
+
+#header a, .ui-menu a {
+    color: #2779aa;
+    text-decoration: none;
+}
+
+.header-table {
+    font-size: 80%;
+    display: table;
+    text-align: left;
+    float: right;
+    margin-right: 5px;
+}
+
+#menu, #content {
+    display: none;
+}
+
+.ui-menu {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 55px;
+    bottom: 0;
+    width: 220px;
+}
+
+.ui-menu .ui-menu-item-wrapper {
+    padding: 10px 1em 10px 1em;
+}
+
+.ui-menu a {
+    display: block;
+}
+
+#content {
+    padding: 0 10px;
+    margin: 0;
+    position: absolute;
+    top: 55px;
+    left: 220px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    font-size: 0.8em;
+}
+
+#footer {
+    color: #999;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.row {
+    display: table;
+    width: 100%;
+}
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: table-cell;
+}
+
+.col-1 { width: 8.33333333%; }
+.col-2 { width: 16.66666667%; }
+.col-3 { width: 25%; }
+.col-4 { width: 33.33333333%; }
+.col-5 { width: 41.66666667%; }
+.col-6 { width: 50%; }
+.col-7 { width: 58.33333333%; }
+.col-8 { width: 66.66666667%; }
+.col-9 { width: 75%; }
+.col-10 { width: 83.33333333%; }
+.col-11 { width: 91.66666667%; }
+.col-12 { width: 100%; }
+
+/* Spinner */
+#floatingCirclesG {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 208px;
+    height: 208px;
+    margin-left: -104px;
+    margin-top: -104px;
+    transform: scale(0.6);
+    -webkit-transform: scale(0.6);
+    -moz-transform: scale(0.6);
+}
+
+.f_circleG {
+    position: absolute;
+    background-color: rgb(255,255,255);
+    height: 37px;
+    width: 37px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    animation-name: f_fadeG;
+    -webkit-animation-name: f_fadeG;
+    -moz-animation-name: f_fadeG;
+    animation-duration: 1.2s;
+    -webkit-animation-duration: 1.2s;
+    -moz-animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-direction: normal;
+    -webkit-animation-direction: normal;
+    -moz-animation-direction: normal;
+}
+
+#frotateG_01 {
+    left: 0;
+    top: 85px;
+    animation-delay: 0.45s;
+    -webkit-animation-delay: 0.45s;
+    -moz-animation-delay: 0.45s;
+}
+
+#frotateG_02 {
+    left: 24px;
+    top: 24px;
+    animation-delay: 0.6s;
+    -webkit-animation-delay: 0.6s;
+    -moz-animation-delay: 0.6s;
+}
+
+#frotateG_03 {
+    left: 85px;
+    top: 0;
+    animation-delay: 0.75s;
+    -webkit-animation-delay: 0.75s;
+    -moz-animation-delay: 0.75s;
+}
+
+#frotateG_04 {
+    right: 24px;
+    top: 24px;
+    animation-delay: 0.9s;
+    -webkit-animation-delay: 0.9s;
+    -moz-animation-delay: 0.9s;
+}
+
+#frotateG_05 {
+    right: 0;
+    top: 85px;
+    animation-delay: 1.05s;
+    -webkit-animation-delay: 1.05s;
+    -moz-animation-delay: 1.05s;
+}
+
+#frotateG_06 {
+    right: 24px;
+    bottom: 24px;
+    animation-delay: 1.2s;
+    -webkit-animation-delay: 1.2s;
+    -moz-animation-delay: 1.2s;
+}
+
+#frotateG_07 {
+    left: 85px;
+    bottom: 0;
+    animation-delay: 1.35s;
+    -webkit-animation-delay: 1.35s;
+    -moz-animation-delay: 1.35s;
+}
+
+#frotateG_08 {
+    left: 24px;
+    bottom: 24px;
+    animation-delay: 1.5s;
+    -webkit-animation-delay: 1.5s;
+    -moz-animation-delay: 1.5s;
+}
+
+@keyframes f_fadeG {
+    0% {
+        background-color: rgb(0,0,0);
+    }
+    100% {
+        background-color: rgb(255,255,255);
+    }
+}
+
+@-webkit-keyframes f_fadeG {
+    0% {
+        background-color: rgb(0,0,0);
+    }
+    100% {
+        background-color: rgb(255,255,255);
+    }
+}
+
+@-moz-keyframes f_fadeG {
+    0% {
+        background-color: rgb(0,0,0);
+    }
+    100% {
+        background-color: rgb(255,255,255);
+    }
+}
+/* end of Spinner */
