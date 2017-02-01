@@ -1,0 +1,8 @@
+https://java.net/jira/browse/GLASSFISH-21440
+https://java.net/jira/browse/JERSEY-2888
+https://bugs.eclipse.org/bugs/show_bug.cgi?id=463169
+http://stackoverflow.com/questions/33722764/glassfish-error-when-producing-json
+
+Bug in GlassFish 4.1.1 when use JAX-RS Jersey implementation and EclipseLink MOXY JSON provider.
+
+SOLUTION: place patched file org.eclipse.persistence.moxy.jar to folder %GLASSFISH_PATH%/glassfish/modules
