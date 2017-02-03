@@ -11,6 +11,13 @@ body {
     height: 100%;
 }
 
+h3 { text-align: center; }
+
+form {
+    padding: 5px 0;
+    font-size: 1.2em;
+}
+
 #header {
     padding: 0;
     margin: 0;
@@ -49,12 +56,15 @@ body {
     display: none;
 }
 
-.ui-menu {
+.menu-content {
     padding: 0;
     margin: 0;
     position: absolute;
     top: 55px;
     bottom: 0;
+}
+
+.ui-menu {
     width: 220px;
 }
 
@@ -64,6 +74,16 @@ body {
 
 .ui-menu a {
     display: block;
+}
+
+.menu-content .ui-menu {
+    border: none !important;
+}
+
+.form-label-value {
+    font-weight: bold;
+    color: #2779aa;
+    margin-left: 1em;
 }
 
 #content {
@@ -109,6 +129,58 @@ body {
 .col-10 { width: 83.33333333%; }
 .col-11 { width: 91.66666667%; }
 .col-12 { width: 100%; }
+
+.w130 { width: 130px !important; }
+.w180 { width: 180px !important; }
+
+.block {
+    text-align: center;
+    white-space: nowrap;
+    margin: 10px 0;
+}
+
+.block:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+}
+
+.block .centered {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    width: 200px;
+}
+
+#msgResult {
+    display: inline-block;
+    width: 50%;
+    white-space: pre-wrap;
+    text-align: center;
+    font-weight: bold;
+    margin-left: 2em;
+}
+
+.centered input,
+.centered select {
+    width: inherit;
+}
+
+input.jq-button {
+    text-align: inherit;
+    outline: none;
+    cursor: text;
+}
+
+input.jq-button:active {
+    color: #2779aa;
+    background: #e4f1fb url(images/ui-bg_glass_100_e4f1fb_1x400.png) 50% 50% repeat-x;
+}
+
+.err { color: red; }
+.done { color: green }
 
 /* Spinner */
 #floatingCirclesG {

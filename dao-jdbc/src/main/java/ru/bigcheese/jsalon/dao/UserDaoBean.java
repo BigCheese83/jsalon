@@ -9,6 +9,7 @@ import ru.bigcheese.jsalon.model.User;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.interceptor.ExcludeDefaultInterceptors;
 import java.util.List;
 import java.util.Map;
 
@@ -87,6 +88,22 @@ public class UserDaoBean extends BaseDaoBean<User> implements UserDao {
         String sql = BASE_SELECT + " where u.username = ?";
         List<User> find = executeQuery(sql, mapper, getParam(username, String.class));
         return find.isEmpty() ? null : find.get(0);
+    }
+
+    @ExcludeDefaultInterceptors
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @Override
+    public boolean checkPassword(String username, String password) {
+        String sql = "select password = md5(?) from users where username = ?";
+        Boolean result = executeSingleResultQuery(sql, Boolean.class, password, username);
+        return result != null && result;
+    }
+
+    @ExcludeDefaultInterceptors
+    @Override
+    public void setPassword(String username, String newPassword) {
+        String sql = "update users set password = md5(?) where username = ?";
+        executeUpdate(sql, newPassword, username);
     }
 
     @Override

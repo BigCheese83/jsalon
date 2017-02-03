@@ -125,6 +125,8 @@ public abstract class BaseDaoBean<T extends BaseModel> implements BaseDao<T> {
                         return (X)Long.valueOf(rs.getLong(1));
                     } else if (targetClass == String.class) {
                         return (X)rs.getString(1);
+                    } else if (targetClass == Boolean.class) {
+                        return (X)Boolean.valueOf(rs.getBoolean(1));
                     }
                 }
             }

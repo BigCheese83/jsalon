@@ -1,6 +1,7 @@
 <%@ page import="static ru.bigcheese.jsalon.core.Constants.*" %>
 <%@ page import="ru.bigcheese.jsalon.web.ui.MenuBuilder" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,24 +15,23 @@
 <body class="ui-widget">
 <!-- Header -->
 <header id="header" class="ui-widget-header row">
-    <div class="col-9"><%=SOFTWARE_NAME%></div>
-    <div class="col-3">
+    <div class="col-8"><%=SOFTWARE_NAME%></div>
+    <div class="col-4">
         <div class="header-table">
             <div><%="Версия " + VERSION_NUMBER + " от " + VERSION_DATE%></div>
             <div>
                 <a href="${pageContext.request.contextPath}/page/profile">
-                    <i class="fa fa-user-o" aria-hidden="true"></i>
-                    ${sessionScope.user.username} [${sessionScope.user.shortFIO}]
+                    <i class="fa fa-user-o" aria-hidden="true"></i> ${sessionScope.user.username} [${sessionScope.user.shortFIO}]
                 </a>
-                <a href="${pageContext.request.contextPath}/logout" style="margin-left: 10px">
-                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                </a>
+                <a href="${pageContext.request.contextPath}/logout" style="margin-left: 10px"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
             </div>
         </div>
     </div>
 </header>
 <!-- Menu -->
+<div class="menu-content ui-widget-content">
 <%=MenuBuilder.of(session, request).build()%>
+</div>
 <!-- Page content -->
 <div id="content" class="ui-widget-content">
     <jsp:include page="/WEB-INF/pages/${param.content}.jsp"/>
@@ -53,5 +53,8 @@
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/datatables.js"></script>
 <script src="${pageContext.request.contextPath}/js/jsalon.js"></script>
+<c:if test="${not empty param.script}">
+<script src="${pageContext.request.contextPath}/js/jsalon.${param.script}.js"></script>
+</c:if>
 </body>
 </html>

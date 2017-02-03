@@ -5,6 +5,7 @@ import ru.bigcheese.jsalon.model.User;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.interceptor.ExcludeDefaultInterceptors;
 import java.util.List;
 
 import static ru.bigcheese.jsalon.model.User.FIND_BY_USERNAME;
@@ -20,6 +21,28 @@ public class UserDaoBean extends BaseDaoBean<User> implements UserDao {
                 .setParameter("username", username)
                 .getResultList();
         return find.isEmpty() ? null : find.get(0);
+    }
+
+    @ExcludeDefaultInterceptors
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @Override
+    public boolean checkPassword(String username, String password) {
+        List find = getEntityManager().createNativeQuery(
+                "select password = md5(?1) from users where username = ?2")
+                .setParameter(1, password)
+                .setParameter(2, username)
+                .getResultList();
+        return !find.isEmpty() && (boolean)find.get(0);
+    }
+
+    @ExcludeDefaultInterceptors
+    @Override
+    public void setPassword(String username, String newPassword) {
+        getEntityManager().createNativeQuery(
+                "update users set password = md5(?1) where username = ?2")
+                .setParameter(1, newPassword)
+                .setParameter(2, username)
+                .executeUpdate();
     }
 
     @Override
