@@ -22,8 +22,8 @@ public class GroupMapper extends AbstractRowMapper<Group> {
         group.setCreated(toDateTime(rs.getTimestamp(get("created"))));
         group.setModified(toDateTime(rs.getTimestamp(get("modified"))));
         group.setVersion(rs.getInt(get("version")));
-        group.setName(GroupName.value(rs.getString("groupname")));
-        group.setDescription(rs.getString("description"));
+        group.setName(GroupName.value(rs.getString(get("groupname"))));
+        group.setDescription(rs.getString(get("description")));
         return group;
     }
 }
