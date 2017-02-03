@@ -166,6 +166,34 @@
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>com.samaxes.maven</groupId>
+                    <artifactId>minify-maven-plugin</artifactId>
+                    <version>1.7.6</version>
+                    <executions>
+                        <execution>
+                            <id>default-minify</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>minify</goal>
+                            </goals>
+                            <configuration>
+                                <skipMerge>true</skipMerge>
+                                <nosuffix>true</nosuffix>
+                                <verbose>true</verbose>
+                                <cssSourceDir>css</cssSourceDir>
+                                <cssSourceIncludes>
+                                    <cssSourceInclude>*.css</cssSourceInclude>
+                                </cssSourceIncludes>
+                                <jsSourceDir>js</jsSourceDir>
+                                <jsSourceIncludes>
+                                    <jsSourceInclude>*.js</jsSourceInclude>
+                                </jsSourceIncludes>
+                                <jsEngine>CLOSURE</jsEngine>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

@@ -22,6 +22,26 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>minify</id>
+            <activation>
+                <property>
+                    <name>minify</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.samaxes.maven</groupId>
+                        <artifactId>minify-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
