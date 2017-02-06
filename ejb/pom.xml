@@ -21,32 +21,21 @@
     <profiles>
         <profile>
             <id>jpa</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-                <property>
-                    <name>dao</name>
-                    <value>jpa</value>
-                </property>
-            </activation>
             <dependencies>
                 <dependency>
                     <groupId>ru.bigcheese.jsalon</groupId>
                     <artifactId>jsalon-dao-jpa</artifactId>
+                    <type>ejb</type>
                 </dependency>
             </dependencies>
         </profile>
         <profile>
             <id>jdbc</id>
-            <activation>
-                <property>
-                    <name>dao</name>
-                    <value>jdbc</value>
-                </property>
-            </activation>
             <dependencies>
                 <dependency>
                     <groupId>ru.bigcheese.jsalon</groupId>
                     <artifactId>jsalon-dao-jdbc</artifactId>
+                    <type>ejb</type>
                 </dependency>
             </dependencies>
         </profile>

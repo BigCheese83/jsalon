@@ -15,6 +15,8 @@
         <dependency>
             <groupId>ru.bigcheese.jsalon</groupId>
             <artifactId>jsalon-ejb</artifactId>
+            <type>ejb</type>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.main.extras</groupId>
@@ -23,6 +25,28 @@
     </dependencies>
 
     <profiles>
+        <profile>
+            <id>jpa</id>
+            <dependencies>
+                <dependency>
+                    <groupId>ru.bigcheese.jsalon</groupId>
+                    <artifactId>jsalon-dao-jpa</artifactId>
+                    <type>ejb</type>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>jdbc</id>
+            <dependencies>
+                <dependency>
+                    <groupId>ru.bigcheese.jsalon</groupId>
+                    <artifactId>jsalon-dao-jdbc</artifactId>
+                    <type>ejb</type>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
         <profile>
             <id>minify</id>
             <activation>

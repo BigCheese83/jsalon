@@ -15,7 +15,6 @@
         <dependency>
             <groupId>ru.bigcheese.jsalon</groupId>
             <artifactId>jsalon-model-entities</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.main.extras</groupId>
