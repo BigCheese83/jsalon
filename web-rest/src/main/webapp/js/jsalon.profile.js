@@ -5,27 +5,28 @@
     var $newPwd = $( "#newPassword" ),
         $confPwd = $( "#confirmpwd" ),
         $pwd = $( "#password" ),
+        $form = $( "#form" ),
         $msgContainer = $( "#msgContainer" ),
         $msgResult = $( "#msgResult" ),
         $sendButton = $( "#sendButton" );
 
     $( ".jq-button" ).button();
 
-    $( "#form" ).on( "submit", function ( event ) {
+    $form.on( "submit", function ( event ) {
         event.preventDefault();
         clearMessage();
         validateForm() && updateProfile();
     });
 
     function updateProfile() {
-        $sendButton.prop( "disabled", true );
-        jsalon.ajaxSendForm( "/jsalon/rest/profile", "PUT", "form" )
+        $sendButton.button( "option", "disabled", true );
+        jsalon.ajaxSendForm( "/jsalon/rest/profile", "PUT", $form )
             .then(function () {
                 showMessage( "Сохранение успешно выполнено", "done" );
                 clearForm();
             }, ajaxErrorHandler )
             .always(function () {
-                $sendButton.prop( "disabled", false );
+                $sendButton.button( "option", "disabled", false );
             });
     }
 
@@ -56,10 +57,7 @@
     }
 
     function ajaxErrorHandler( jqXHR, textStatus, errorThrown ) {
-        var err = ( jqXHR.responseJSON && jqXHR.responseJSON.message )
-            ? jqXHR.responseJSON.message
-            : errorThrown;
-        error( err );
+        error( jsalon.getAjaxError( jqXHR, errorThrown ) );
     }
 
 })( jQuery );

@@ -1,12 +1,25 @@
 package ru.bigcheese.jsalon.model;
 
+import ru.bigcheese.jsalon.model.to.DiscountTO;
+
 import java.util.Objects;
+
+import static ru.bigcheese.jsalon.core.StringUtils.stripToNull;
 
 public class Discount extends BaseModel {
 
     private String name;
     private Integer value;
     private String description;
+
+    public Discount() {}
+
+    public Discount(DiscountTO discountTO) {
+        setId(discountTO.getId());
+        this.name = stripToNull(discountTO.getName());
+        this.value = discountTO.getValue();
+        this.description = stripToNull(discountTO.getDescription());
+    }
 
     public String getName() {
         return name;
@@ -30,6 +43,12 @@ public class Discount extends BaseModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void update(DiscountTO discountTO) {
+        name = stripToNull(discountTO.getName());
+        value = discountTO.getValue();
+        description = stripToNull(discountTO.getDescription());
     }
 
     @Override

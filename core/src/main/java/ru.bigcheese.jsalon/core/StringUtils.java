@@ -6,4 +6,16 @@ public final class StringUtils {
         String s = str == null ? "" : str;
         return s.trim().isEmpty();
     }
+
+    public static boolean notBlank(String str) {
+        return !isBlank(str);
+    }
+
+    public static String stripToNull(String str) {
+        if (str == null) {
+            return null;
+        }
+        String s = str.trim();
+        return s.isEmpty() ? null : s;
+    }
 }

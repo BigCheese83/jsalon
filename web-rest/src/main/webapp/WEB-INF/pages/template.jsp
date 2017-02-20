@@ -29,7 +29,7 @@
     </div>
 </header>
 <!-- Menu -->
-<div class="menu-content ui-widget-content">
+<div class="menu-content">
 <%=MenuBuilder.of(session, request).build()%>
 </div>
 <!-- Page content -->

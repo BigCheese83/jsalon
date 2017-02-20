@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validation-config xmlns="http://jboss.org/xml/ns/javax/validation/configuration" version="1.1">
+    <constraint-mapping>META-INF/constraints.xml</constraint-mapping>
+</validation-config>

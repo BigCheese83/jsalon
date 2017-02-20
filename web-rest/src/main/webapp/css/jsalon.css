@@ -1,10 +1,9 @@
 html, body {
     -webkit-tap-highlight-color: transparent; /* disable webkit tap highlight */
-    overflow: hidden;
+    background: #f2f5f7 url("images/ui-bg_highlight-hard_100_f2f5f7_1x100.png") 50% top repeat-x;
 }
 
 body {
-    overflow: hidden;
     padding: 0;
     margin: 0;
     width: 100%;
@@ -15,13 +14,13 @@ h3 { text-align: center; }
 
 form {
     padding: 5px 0;
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 
 #header {
     padding: 0;
     margin: 0;
-    position: absolute;
+    position: fixed;
     text-align: center;
     z-index: 9998;
     color: #2779aa;
@@ -59,7 +58,9 @@ form {
 .menu-content {
     padding: 0;
     margin: 0;
-    position: absolute;
+    position: fixed;
+    border-right: 1px solid #dddddd;
+    z-index: 1;
     top: 55px;
     bottom: 0;
 }
@@ -94,14 +95,46 @@ form {
     left: 220px;
     right: 0;
     bottom: 0;
-    overflow: auto;
     font-size: 0.8em;
+    border: none;
 }
 
 #footer {
     color: #999;
     padding: 15px 0;
     text-align: center;
+}
+
+.ui-dialog .ui-dialog-titlebar,
+.ui-dialog .ui-dialog-content,
+.ui-dialog .ui-widget {
+    font-size: 80% !important;
+}
+
+.ui-dialog-content form {
+    padding: 0;
+}
+
+.ui-dialog fieldset {
+    border: none;
+}
+
+.ui-dialog-content input,
+.ui-dialog-content textarea,
+.ui-dialog-content select {
+    width: 230px;
+}
+
+.ui-dialog-content label {
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.dialog-icon {
+    float:left;
+    margin: 12px 12px 20px 0;
 }
 
 .row {
@@ -177,6 +210,42 @@ input.jq-button {
 input.jq-button:active {
     color: #2779aa;
     background: #e4f1fb url(images/ui-bg_glass_100_e4f1fb_1x400.png) 50% 50% repeat-x;
+}
+
+table.no-footer {
+    border-bottom: none !important;
+}
+
+table.fixedHeader-floating {
+    font-size: 80% !important;
+}
+
+.fg-toolbar .dataTables_length label,
+.fg-toolbar .dataTables_filter label {
+    margin-top: 5px;
+    display: inline-block;
+}
+
+.dt-buttons {
+    margin-right: 15px;
+    float: right !important;
+}
+
+div.dt-buttons .dt-button:hover > span {
+    background-color: inherit;
+}
+
+a.dt-button { margin: 0 5px; }
+
+.crud-buttonset { margin-bottom: 5px; }
+
+.err-container {
+    color: red;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    display: none;
+    white-space: pre-wrap;
 }
 
 .err { color: red; }

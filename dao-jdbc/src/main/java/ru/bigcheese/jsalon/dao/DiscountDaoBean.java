@@ -1,6 +1,7 @@
 package ru.bigcheese.jsalon.dao;
 
 import com.google.common.collect.ImmutableMap;
+import ru.bigcheese.jsalon.core.exception.DatabaseException;
 import ru.bigcheese.jsalon.core.exception.OptimisticLockException;
 import ru.bigcheese.jsalon.dao.mapper.DiscountMapper;
 import ru.bigcheese.jsalon.dao.mapper.RowMapper;
@@ -9,7 +10,11 @@ import ru.bigcheese.jsalon.model.Discount;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Map;
+import java.util.Set;
 
 @Stateless
 public class DiscountDaoBean extends BaseDaoBean<Discount> implements DiscountDao {
@@ -61,6 +66,18 @@ public class DiscountDaoBean extends BaseDaoBean<Discount> implements DiscountDa
     public boolean existByName(String name) {
         String sql = "select name from discount where name = ?";
         return executeSingleResultQuery(sql, String.class, name) != null;
+    }
+
+    @Override
+    public void deleteDiscounts(Set<Long> ids) {
+        String sql = "delete from discount where id = any(?)";
+        try (Connection connection = getDataSource().getConnection();
+             PreparedStatement pstm = connection.prepareStatement(sql)) {
+            pstm.setArray(1, connection.createArrayOf("BIGINT", ids.toArray()));
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
+        }
     }
 
     @Override
