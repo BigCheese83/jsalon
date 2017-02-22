@@ -6,11 +6,20 @@ import java.util.Set;
 
 public class Service extends BaseModel {
 
+    private String category;
     private String name;
     private BigDecimal cost;
     private Integer duration;
     private String description;
     private Set<Post> posts;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getName() {
         return name;
@@ -58,20 +67,22 @@ public class Service extends BaseModel {
         if (!(o instanceof Service)) return false;
         if (!super.equals(o)) return false;
         Service service = (Service) o;
-        return Objects.equals(name, service.name) &&
+        return Objects.equals(category, service.category) &&
+                Objects.equals(name, service.name) &&
                 Objects.equals(cost, service.cost) &&
                 Objects.equals(duration, service.duration);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, cost, duration);
+        return Objects.hash(super.hashCode(), category, name, cost, duration);
     }
 
     @Override
     public String toString() {
-        return "Service{" + super.toString() + ", " +
-                "name='" + name + '\'' +
+        return "Service{" +
+                "category='" + category + '\'' +
+                ", name='" + name + '\'' +
                 ", cost=" + cost +
                 ", duration=" + duration +
                 ", description='" + description + '\'' +

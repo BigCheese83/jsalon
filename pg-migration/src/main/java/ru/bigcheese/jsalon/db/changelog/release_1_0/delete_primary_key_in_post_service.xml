@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="delete_primary_key_in_post_service" author="bigcheese">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <columnExists tableName="post_service" columnName="id"/>
+                <primaryKeyExists tableName="post_service" primaryKeyName="post_service_pkey"/>
+            </and>
+        </preConditions>
+        <sql splitStatements="true" stripComments="true">
+            <![CDATA[
+                ALTER TABLE post_service DROP CONSTRAINT post_service_pkey;
+                ALTER TABLE post_service DROP COLUMN id;
+                ALTER TABLE post_service ADD PRIMARY KEY (post_id, service_id);
+                DROP SEQUENCE IF EXISTS post_service_id_seq;
+            ]]>
+        </sql>
+        <rollback/>
+    </changeSet>
+</databaseChangeLog>

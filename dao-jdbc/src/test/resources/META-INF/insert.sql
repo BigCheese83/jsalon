@@ -18,20 +18,20 @@ VALUES (nextval('post_id_seq'), current_timestamp, current_timestamp, 1, 'Кос
 INSERT INTO post(id, created, modified, version, name, description)
 VALUES (nextval('post_id_seq'), current_timestamp, current_timestamp, 1, 'Стилист', NULL);
 
-INSERT INTO service(id, created, modified, version, name, cost, duration, description)
-VALUES (nextval('service_id_seq'), current_timestamp, current_timestamp, 1, 'Макияж', 700.5, 30, NULL);
-INSERT INTO service(id, created, modified, version, name, cost, duration, description)
-VALUES (nextval('service_id_seq'), current_timestamp, current_timestamp, 1, 'Мелирование', 650, 20, NULL);
-INSERT INTO service(id, created, modified, version, name, cost, duration, description)
-VALUES (nextval('service_id_seq'), current_timestamp, current_timestamp, 1, 'Восстановление волос', 2200.5, 30, NULL);
-INSERT INTO service(id, created, modified, version, name, cost, duration, description)
-VALUES (nextval('service_id_seq'), current_timestamp, current_timestamp, 1, 'Фотоомоложение лица', 6400, 40, NULL);
-INSERT INTO service(id, created, modified, version, name, cost, duration, description)
-VALUES (nextval('service_id_seq'), current_timestamp, current_timestamp, 1, 'Окрашивание волос', 5400, 55, 'краска Loreal');
+INSERT INTO service(id, created, modified, version, category, name, cost, duration, description)
+VALUES (nextval('service_id_seq'), current_timestamp, current_timestamp, 1, 'Макияж', 'Макияж', 700.5, 30, NULL);
+INSERT INTO service(id, created, modified, version, category, name, cost, duration, description)
+VALUES (nextval('service_id_seq'), current_timestamp, current_timestamp, 1, 'Окрашивание волос', 'Колорирование волос',  1900, 20, NULL);
+INSERT INTO service(id, created, modified, version, category, name, cost, duration, description)
+VALUES (nextval('service_id_seq'), current_timestamp, current_timestamp, 1, 'Женская стрижка', 'Вечерняя прическа', 2200.5, 30, NULL);
+INSERT INTO service(id, created, modified, version, category, name, cost, duration, description)
+VALUES (nextval('service_id_seq'), current_timestamp, current_timestamp, 1, 'Маски для лица', 'Неинвазивная карбокситерапия', 1500, 40, NULL);
+INSERT INTO service(id, created, modified, version, category, name, cost, duration, description)
+VALUES (nextval('service_id_seq'), current_timestamp, current_timestamp, 1, 'Уход за волосами', 'Ламинирование волос', 2000, 55, 'краска Loreal');
 
-INSERT INTO post_service(id, post_id, service_id) VALUES (nextval('post_service_id_seq'), 1, 3);
-INSERT INTO post_service(id, post_id, service_id) VALUES (nextval('post_service_id_seq'), 2, 3);
-INSERT INTO post_service(id, post_id, service_id) VALUES (nextval('post_service_id_seq'), 4, 4);
+INSERT INTO post_service(post_id, service_id) VALUES (1, 3);
+INSERT INTO post_service(post_id, service_id) VALUES (2, 3);
+INSERT INTO post_service(post_id, service_id) VALUES (4, 4);
 
 INSERT INTO address(id, created, modified, version, country, district, city, street, house, section, flat, zip)
 VALUES (nextval('address_id_seq'), current_timestamp, current_timestamp, 1, 'Россия', NULL, 'Москва', 'Южно-портовый проезд', '14', NULL, '12', NULL);

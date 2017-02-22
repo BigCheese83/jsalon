@@ -20,11 +20,11 @@ public class ServiceDaoBean extends BaseDaoBean<Service> implements ServiceDao {
 
     private static final Map<String, String> queries = new ImmutableMap.Builder<String, String>()
             .put(INSERT_KEY,
-                    "insert into service (id, created, modified, version, name, cost, duration, description) " +
-                    "values (?, now(), now(), 0, ?, ?, ?, ?)")
+                    "insert into service (id, created, modified, version, category, name, cost, duration, description) " +
+                    "values (?, now(), now(), 0, ?, ?, ?, ?, ?)")
             .put(UPDATE_KEY,
                     "update service set modified = now(), version = version + 1, " +
-                    "name = ?, cost = ?, duration = ?, description = ? " +
+                    "category = ?, name = ?, cost = ?, duration = ?, description = ? " +
                     "where id = ? and version = ?")
             .put(DELETE_KEY, "delete from service where id = ?")
             .put(FIND_ALL_KEY, "select * from service order by modified")
@@ -40,6 +40,7 @@ public class ServiceDaoBean extends BaseDaoBean<Service> implements ServiceDao {
     public void create(Service model) {
         Long id = generateId("select nextval('service_id_seq')");
         executeUpdate(getSql(INSERT_KEY), id,
+                getParam(model.getCategory(), String.class),
                 getParam(model.getName(), String.class),
                 getParam(model.getCost(), BigDecimal.class),
                 getParam(model.getDuration(), Integer.class),
@@ -48,17 +49,17 @@ public class ServiceDaoBean extends BaseDaoBean<Service> implements ServiceDao {
 
         Set<Post> posts = model.getPosts();
         if (posts != null && posts.size() > 0) {
-            String sql = "insert into post_service values (nextval('post_service_id_seq'), ?, ?)";
             Object[][] params = posts.stream()
                     .map(e -> new Object[]{e.getId(), model.getId()})
                     .toArray(Object[][]::new);
-            batchUpdate(sql, params);
+            batchUpdate("insert into post_service values (?, ?)", params);
         }
     }
 
     @Override
     public void update(Service model) {
         int upd = executeUpdate(getSql(UPDATE_KEY),
+                getParam(model.getCategory(), String.class),
                 getParam(model.getName(), String.class),
                 getParam(model.getCost(), BigDecimal.class),
                 getParam(model.getDuration(), Integer.class),
@@ -71,16 +72,15 @@ public class ServiceDaoBean extends BaseDaoBean<Service> implements ServiceDao {
 
         Set<Post> posts = model.getPosts();
         if (posts != null) {
-            String deleteSql = "delete from post_service where service_id = ?";
-            executeUpdate(deleteSql, model.getId());
+            executeUpdate("delete from post_service where service_id = ?", model.getId());
             if (posts.size() > 0) {
                 String idSet = posts.stream()
-                        .map(s -> String.valueOf(s.getId()))
+                        .map(s -> Long.toString(s.getId()))
                         .collect(Collectors.joining(","));
                 String insertSql =
-                        "insert into post_service(id, service_id, post_id)" +
-                        "   select nextval('post_service_id_seq'), "+ model.getId() +", a.* " +
-                        "   from unnest(array["+ String.join(",", idSet) +"]) a";
+                        "insert into post_service(service_id, post_id)" +
+                        "   select "+ model.getId() +", a.* " +
+                        "   from unnest(array["+ idSet +"]) a";
                 executeUpdate(insertSql);
             }
         }

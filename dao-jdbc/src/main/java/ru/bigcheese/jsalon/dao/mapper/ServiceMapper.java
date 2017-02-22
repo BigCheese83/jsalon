@@ -21,6 +21,7 @@ public class ServiceMapper extends AbstractRowMapper<Service> {
         service.setCreated(toDateTime(rs.getTimestamp(get("created"))));
         service.setModified(toDateTime(rs.getTimestamp(get("modified"))));
         service.setVersion(rs.getInt(get("version")));
+        service.setCategory(rs.getString(get("category")));
         service.setName(rs.getString(get("name")));
         service.setCost(rs.getBigDecimal(get("cost")));
         service.setDuration(rs.getInt(get("duration")));

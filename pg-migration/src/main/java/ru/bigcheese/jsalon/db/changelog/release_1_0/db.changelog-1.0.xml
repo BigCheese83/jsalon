@@ -19,6 +19,8 @@
     <include file="ru/bigcheese/jsalon/db/changelog/release_1_0/create_table_users_groups.xml"/>
     <include file="ru/bigcheese/jsalon/db/changelog/release_1_0/create_v_user_role_view.xml"/>
     <include file="ru/bigcheese/jsalon/db/changelog/release_1_0/add_admin_user.xml"/>
+    <include file="ru/bigcheese/jsalon/db/changelog/release_1_0/add_column_category_to_service.xml"/>
+    <include file="ru/bigcheese/jsalon/db/changelog/release_1_0/delete_primary_key_in_post_service.xml"/>
 
     <changeSet id="tag_1.0" author="bigcheese">
         <tagDatabase tag="version_1.0"/>

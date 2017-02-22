@@ -15,7 +15,6 @@ DROP SEQUENCE discount_id_seq;
 DROP SEQUENCE passport_id_seq;
 DROP SEQUENCE post_id_seq;
 DROP SEQUENCE service_id_seq;
-DROP SEQUENCE post_service_id_seq;
 DROP SEQUENCE person_id_seq;
 DROP SEQUENCE client_id_seq;
 DROP SEQUENCE master_id_seq;

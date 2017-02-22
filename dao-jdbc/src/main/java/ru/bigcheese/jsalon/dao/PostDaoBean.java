@@ -43,11 +43,10 @@ public class PostDaoBean extends BaseDaoBean<Post> implements PostDao {
 
         Set<Service> services = model.getServices();
         if (services != null && services.size() > 0) {
-            String sql = "insert into post_service values (nextval('post_service_id_seq'), ?, ?)";
             Object[][] params = services.stream()
                     .map(e -> new Object[]{model.getId(), e.getId()})
                     .toArray(Object[][]::new);
-            batchUpdate(sql, params);
+            batchUpdate("insert into post_service values (?, ?)", params);
         }
     }
 
@@ -64,15 +63,14 @@ public class PostDaoBean extends BaseDaoBean<Post> implements PostDao {
 
         Set<Service> services = model.getServices();
         if (services != null) {
-            String deleteSql = "delete from post_service where post_id = ?";
-            executeUpdate(deleteSql, model.getId());
+            executeUpdate("delete from post_service where post_id = ?", model.getId());
             if (services.size() > 0) {
                 String idSet = services.stream()
-                        .map(s -> String.valueOf(s.getId()))
+                        .map(s -> Long.toString(s.getId()))
                         .collect(Collectors.joining(","));
                 String insertSql =
                         "insert into post_service " +
-                        "   select nextval('post_service_id_seq'), "+ model.getId() +", a.* " +
+                        "   select "+ model.getId() +", a.* " +
                         "   from unnest(array["+ idSet +"]) a";
                 executeUpdate(insertSql);
             }

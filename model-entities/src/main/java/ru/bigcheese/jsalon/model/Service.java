@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = {"name"}) })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = {"category", "name"}) })
 @NamedQueries({
         @NamedQuery(name = Service.EXISTS_BY_NAME,
                 query = "select s.name from Service s where s.name = :name")
@@ -16,6 +16,7 @@ public class Service extends BaseModel {
 
     public static final String EXISTS_BY_NAME = "Service.existsByName";
 
+    private String category;
     private String name;
     private BigDecimal cost;
     private Integer duration;
@@ -27,6 +28,15 @@ public class Service extends BaseModel {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "serviceSeq")
     public Long getId() {
         return super.getId();
+    }
+
+    @Column(nullable = false)
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Column(nullable = false)
@@ -86,20 +96,22 @@ public class Service extends BaseModel {
         if (!(o instanceof Service)) return false;
         if (!super.equals(o)) return false;
         Service service = (Service) o;
-        return Objects.equals(getName(), service.getName()) &&
+        return Objects.equals(getCategory(), service.getCategory()) &&
+                Objects.equals(getName(), service.getName()) &&
                 Objects.equals(getCost(), service.getCost()) &&
                 Objects.equals(getDuration(), service.getDuration());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getName(), getCost(), getDuration());
+        return Objects.hash(super.hashCode(), getCategory(), getName(), getCost(), getDuration());
     }
 
     @Override
     public String toString() {
-        return "Service{" + super.toString() + ", " +
-                "name='" + name + '\'' +
+        return "Service{" +
+                "category='" + category + '\'' +
+                ", name='" + name + '\'' +
                 ", cost=" + cost +
                 ", duration=" + duration +
                 ", description='" + description + '\'' +
