@@ -113,7 +113,7 @@
             className: "ui-corner-all",
             text: "<i class='fa fa-refresh'></i> Обновить",
             action: function( e, dt, node, config ) {
-                dt.ajax.reload();
+                dt.ajax.reload( null, false );
             }
         };
 

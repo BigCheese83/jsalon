@@ -1,23 +1,38 @@
 package ru.bigcheese.jsalon.model;
 
+import ru.bigcheese.jsalon.model.to.PostTO;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import static ru.bigcheese.jsalon.core.StringUtils.stripToNull;
 
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = {"name"}) })
 @NamedQueries({
         @NamedQuery(name = Post.EXISTS_BY_NAME,
-                query = "select p.name from Post p where p.name = :name")
+                query = "select p.name from Post p where p.name = :name"),
+        @NamedQuery(name = Post.DELETE_BY_IDS,
+                query = "delete from Post p where p.id in :ids")
 })
 public class Post extends BaseModel {
 
     public static final String EXISTS_BY_NAME = "Post.existsByName";
+    public static final String DELETE_BY_IDS = "Post.deleteByIds";
 
     private String name;
     private String description;
     private Set<Service> services = new HashSet<>();
+
+    public Post() {}
+
+    public Post(PostTO postTO) {
+        setId(postTO.getId());
+        update(postTO);
+    }
 
     @Id
     @SequenceGenerator(name = "postSeq", sequenceName = "post_id_seq", allocationSize = 1)
@@ -27,6 +42,7 @@ public class Post extends BaseModel {
     }
 
     @Column(nullable = false)
+    @NotNull(message = "Name must be set.")
     public String getName() {
         return name;
     }
@@ -60,6 +76,11 @@ public class Post extends BaseModel {
         if (!service.getPosts().contains(this)) {
             service.getPosts().add(this);
         }
+    }
+
+    public void update(PostTO postTO) {
+        name = stripToNull(postTO.getName());
+        description = stripToNull(postTO.getDescription());
     }
 
     @Override

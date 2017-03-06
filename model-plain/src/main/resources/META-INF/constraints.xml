@@ -20,4 +20,11 @@
             </constraint>
         </field>
     </bean>
+    <bean class="ru.bigcheese.jsalon.model.Post" ignore-annotations="false">
+        <field name="name">
+            <constraint annotation="javax.validation.constraints.NotNull">
+                <message>Name must be set.</message>
+            </constraint>
+        </field>
+    </bean>
 </constraint-mappings>

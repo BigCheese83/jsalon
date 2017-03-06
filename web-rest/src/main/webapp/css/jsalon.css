@@ -239,6 +239,41 @@ a.dt-button { margin: 0 5px; }
 
 .crud-buttonset { margin-bottom: 5px; }
 
+.show-btn {
+    font-size: 90% !important;
+}
+
+.showTable {
+    border-collapse: collapse;
+    margin-top: 5px;
+}
+
+.showTable td,
+.showTable th {
+    padding: 7px;
+}
+
+.showTable th {
+    text-align: left;
+    text-decoration: underline;
+}
+
+.showTable tr:nth-child(even) {
+    background: #ffffff;
+}
+
+.showTable tr:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+.ui-dialog .loading .fa {
+    line-height: 74px;
+}
+
+.center {
+    text-align: center;
+}
+
 .err-container {
     color: red;
     width: 100%;
@@ -246,6 +281,10 @@ a.dt-button { margin: 0 5px; }
     padding-bottom: 10px;
     display: none;
     white-space: pre-wrap;
+}
+
+.ui-dialog .err-container {
+    padding: 0;
 }
 
 .err { color: red; }

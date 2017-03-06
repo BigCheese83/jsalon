@@ -16,9 +16,7 @@ public class Discount extends BaseModel {
 
     public Discount(DiscountTO discountTO) {
         setId(discountTO.getId());
-        this.name = stripToNull(discountTO.getName());
-        this.value = discountTO.getValue();
-        this.description = stripToNull(discountTO.getDescription());
+        update(discountTO);
     }
 
     public String getName() {

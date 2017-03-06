@@ -1,13 +1,24 @@
 package ru.bigcheese.jsalon.model;
 
+import ru.bigcheese.jsalon.model.to.PostTO;
+
 import java.util.Objects;
 import java.util.Set;
+
+import static ru.bigcheese.jsalon.core.StringUtils.stripToNull;
 
 public class Post extends BaseModel {
 
     private String name;
     private String description;
     private Set<Service> services;
+
+    public Post() {}
+
+    public Post(PostTO postTO) {
+        setId(postTO.getId());
+        update(postTO);
+    }
 
     public String getName() {
         return name;
@@ -31,6 +42,11 @@ public class Post extends BaseModel {
 
     public void setServices(Set<Service> services) {
         this.services = services;
+    }
+
+    public void update(PostTO postTO) {
+        name = stripToNull(postTO.getName());
+        description = stripToNull(postTO.getDescription());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package ru.bigcheese.jsalon.dao;
 
 import com.google.common.collect.ImmutableMap;
+import ru.bigcheese.jsalon.core.exception.DatabaseException;
 import ru.bigcheese.jsalon.core.exception.OptimisticLockException;
 import ru.bigcheese.jsalon.dao.mapper.PostMapper;
 import ru.bigcheese.jsalon.dao.mapper.RowMapper;
@@ -10,6 +11,9 @@ import ru.bigcheese.jsalon.model.Service;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -88,6 +92,18 @@ public class PostDaoBean extends BaseDaoBean<Post> implements PostDao {
     public boolean existByName(String name) {
         String sql = "select name from post where name = ?";
         return executeSingleResultQuery(sql, String.class, name) != null;
+    }
+
+    @Override
+    public void deletePosts(Set<Long> ids) {
+        String sql = "delete from post where id = any(?)";
+        try (Connection connection = getDataSource().getConnection();
+             PreparedStatement pstm = connection.prepareStatement(sql)) {
+            pstm.setArray(1, connection.createArrayOf("BIGINT", ids.toArray()));
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
+        }
     }
 
     @Override

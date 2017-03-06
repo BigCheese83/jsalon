@@ -54,7 +54,7 @@
 <script src="${pageContext.request.contextPath}/js/datatables.js"></script>
 <script src="${pageContext.request.contextPath}/js/jsalon.js"></script>
 <c:if test="${not empty param.script}">
-<script src="${pageContext.request.contextPath}/js/jsalon.${param.script}.js"></script>
+    <jsp:include page="/WEB-INF/pages/${param.script}.jsp"/>
 </c:if>
 </body>
 </html>

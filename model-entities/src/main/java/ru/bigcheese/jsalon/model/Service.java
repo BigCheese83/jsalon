@@ -10,11 +10,14 @@ import java.util.Set;
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = {"category", "name"}) })
 @NamedQueries({
         @NamedQuery(name = Service.EXISTS_BY_NAME,
-                query = "select s.name from Service s where s.name = :name")
+                query = "select s.name from Service s where s.name = :name"),
+        @NamedQuery(name = Service.GET_BY_IDS,
+                query = "select s from Service s where s.id in :ids")
 })
 public class Service extends BaseModel {
 
     public static final String EXISTS_BY_NAME = "Service.existsByName";
+    public static final String GET_BY_IDS = "Service.getByIds";
 
     private String category;
     private String name;

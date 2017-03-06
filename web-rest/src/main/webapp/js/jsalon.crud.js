@@ -30,19 +30,39 @@
                     { targets: [ 2 ], data: "value" },
                     { targets: [ 3 ], data: "description", defaultContent: "" }
                 ]
+            },
+            posts: {
+                ajax: {
+                    url: "/jsalon/rest/posts",
+                    dataSrc: ""
+                },
+                columnDefs: [
+                    { targets: [ 0, 1, 2 ], className: "dt-center" },
+                    { targets: [ 0 ], data: "id", width: "15px", searchable: false },
+                    { targets: [ 1 ], data: "name", width: "40%" },
+                    { targets: [ 2 ], data: null, width: "110px", searchable: false, orderable: false,
+                        defaultContent: "<button class='ui-button ui-corner-all show-btn'>Показать</button>" },
+                    { targets: [ 3 ], data: "description", defaultContent: "" }
+                ]
             }
         },
         formValidator: {
             discounts: validateDiscountForm
         },
         formMapper: {
-            discounts: fillDiscountForm
+            discounts: fillDiscountForm,
+            posts: fillPostForm
         }
     };
 
     var $datatable = $( "#table" ).DataTable( options.datatable[ pageName ] );
     $datatable.on( "select", enableCrudButtons );
     $datatable.on( "deselect", enableCrudButtons );
+    $datatable.on( "user-select", function( e, dt, type, cell, originalEvent ) {
+        if ( originalEvent.target.nodeName.toLowerCase() === "button" ) {
+            e.preventDefault();
+        }
+    });
 
     $createButton.button();
     $editButton.button({ disabled: true });
@@ -188,6 +208,11 @@
     function fillDiscountForm( data ) {
         $( "#name" ).val( data.name );
         $( "#value" ).val( data.value );
+        $( "#description" ).val( data.description );
+    }
+
+    function fillPostForm( data ) {
+        $( "#name" ).val( data.name );
         $( "#description" ).val( data.description );
     }
 

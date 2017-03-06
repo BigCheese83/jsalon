@@ -1,6 +1,7 @@
 package ru.bigcheese.jsalon.dao;
 
 import com.google.common.collect.ImmutableMap;
+import ru.bigcheese.jsalon.core.exception.DatabaseException;
 import ru.bigcheese.jsalon.core.exception.OptimisticLockException;
 import ru.bigcheese.jsalon.dao.mapper.RowMapper;
 import ru.bigcheese.jsalon.dao.mapper.ServiceMapper;
@@ -11,6 +12,12 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -97,6 +104,34 @@ public class ServiceDaoBean extends BaseDaoBean<Service> implements ServiceDao {
     public boolean existsByName(String name) {
         String sql = "select name from service where name = ?";
         return executeSingleResultQuery(sql, String.class, name) != null;
+    }
+
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @Override
+    public List<Service> getServicesByIds(Set<Long> ids) {
+        String sql = "select * from service where id = any(?)";
+        List<Service> result = new ArrayList<>();
+        try (Connection connection = getDataSource().getConnection();
+             PreparedStatement pstm = connection.prepareStatement(sql)) {
+            pstm.setArray(1, connection.createArrayOf("BIGINT", ids.toArray()));
+            try (ResultSet rs = pstm.executeQuery()) {
+                while (rs.next()) {
+                    result.add(mapper.mapRow(rs));
+                }
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
+        }
+        return result;
+    }
+
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @Override
+    public List<Service> getServicesByPostId(Long postId) {
+        String sql = "select s.* from service s " +
+                "join post_service ps on s.id = ps.service_id " +
+                "where ps.post_id = ?";
+        return executeQuery(sql, mapper, postId);
     }
 
     @Override

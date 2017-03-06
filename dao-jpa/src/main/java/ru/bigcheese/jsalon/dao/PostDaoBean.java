@@ -5,6 +5,7 @@ import ru.bigcheese.jsalon.model.Post;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import java.util.Set;
 
 @Stateless
 public class PostDaoBean extends BaseDaoBean<Post> implements PostDao {
@@ -15,6 +16,14 @@ public class PostDaoBean extends BaseDaoBean<Post> implements PostDao {
         return !getEntityManager().createNamedQuery(Post.EXISTS_BY_NAME)
                 .setParameter("name", name)
                 .getResultList().isEmpty();
+    }
+
+    @Override
+    public void deletePosts(Set<Long> ids) {
+        getEntityManager().createNamedQuery(Post.DELETE_BY_IDS)
+                .setParameter("ids", ids)
+                .executeUpdate();
+        getEntityManager().flush();
     }
 
     @Override

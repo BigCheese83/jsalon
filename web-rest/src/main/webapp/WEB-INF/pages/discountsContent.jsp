@@ -17,7 +17,7 @@
     </thead>
 </table>
 <div id="dialog">
-    <div id="dialogErrors" class="err-container" style="padding: 0"></div>
+    <div id="dialogErrors" class="err-container"></div>
     <form id="dialog-form">
         <fieldset>
             <label for="name">Наименование</label>
