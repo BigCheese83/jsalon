@@ -40,6 +40,14 @@ public class ServiceDaoBean extends BaseDaoBean<Service> implements ServiceDao {
     }
 
     @Override
+    public void deleteServices(Set<Long> ids) {
+        getEntityManager().createNamedQuery(Service.DELETE_BY_IDS)
+                .setParameter("ids", ids)
+                .executeUpdate();
+        getEntityManager().flush();
+    }
+
+    @Override
     protected Class<Service> getModelClass() {
         return Service.class;
     }

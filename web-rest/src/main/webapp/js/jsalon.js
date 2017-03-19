@@ -24,9 +24,18 @@
         var obj = {};
         var params = decodeURIComponent( $form.serialize() ).split( "&" );
         params.forEach(function ( item ) {
-            var pair = item.split( "=" );
-            if ( pair[ 1 ] ) {
-                obj[ pair[ 0 ] ] = pair[ 1 ];
+            var pair = item.split( "=" ),
+                key = pair[ 0 ],
+                value = pair[ 1 ];
+            if ( value ) {
+                if ( key in obj ) {
+                    if ( !Array.isArray( obj[ key ] ) ) {
+                        obj[ key ] = [].concat( obj[ key ] );
+                    }
+                    obj[ key ].push( value );
+                } else {
+                    obj[ key ] = value;
+                }
             }
         });
         return JSON.stringify( obj );
@@ -81,6 +90,7 @@
     (function dataTableDefaults() {
         $.extend( true, $.fn.dataTable.defaults, {
             processing: true,
+            autoWidth: false,
             rowId: "id",
             select: true,
             fixedHeader: {

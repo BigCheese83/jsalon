@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +12,11 @@
     <section id="content">
         <form action="j_security_check" method="post">
             <h1>Authorization</h1>
+            <c:if test="${param.fail}">
+                <h5 class="err" style="margin-bottom:5px">
+                    Invalid username or password. Try again.
+                </h5>
+            </c:if>
             <div>
                 <input type="text" placeholder="Username" id="username" name="j_username" autofocus required>
             </div>

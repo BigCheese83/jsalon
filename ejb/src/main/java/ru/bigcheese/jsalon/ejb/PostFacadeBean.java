@@ -36,6 +36,12 @@ public class PostFacadeBean implements PostFacade {
         return postDao.findAll().stream().map(PostTO::new).collect(toList());
     }
 
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    @Override
+    public List<PostTO> getPostsByServiceId(Long serviceId) {
+        return postDao.getPostsByServiceId(serviceId).stream().map(PostTO::new).collect(toList());
+    }
+
     @Override
     public Post createPost(PostTO post) throws FacadeException {
         Objects.requireNonNull(post, "Post must be not null.");

@@ -2,4 +2,5 @@
 <jsp:include page="/WEB-INF/pages/template.jsp">
     <jsp:param name="title" value="Услуги"/>
     <jsp:param name="content" value="servicesContent"/>
+    <jsp:param name="script" value="servicesScript"/>
 </jsp:include>

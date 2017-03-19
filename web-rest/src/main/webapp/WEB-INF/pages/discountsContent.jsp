@@ -17,13 +17,12 @@
     </thead>
 </table>
 <div id="dialog">
-    <div id="dialogErrors" class="err-container"></div>
     <form id="dialog-form">
         <fieldset>
             <label for="name">Наименование</label>
             <input type="text" name="name" id="name" class="ui-widget-content ui-corner-all" required>
             <label for="value">Значение, %</label>
-            <input type="number" name="value" id="value" class="ui-widget-content ui-corner-all" required>
+            <input type="number" name="value" id="value" class="ui-widget-content ui-corner-all" min="1" max="100" required>
             <label for="description">Описание</label>
             <textarea name="description" id="description" class="ui-widget-content ui-corner-all"></textarea>
             <input type="submit" tabindex="-1" id="submit" style="display: none">

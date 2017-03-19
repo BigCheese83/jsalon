@@ -28,6 +28,13 @@ public class PostService {
         return RestResponse.ok(new GenericEntity<List<PostTO>>(posts){});
     }
 
+    @GET
+    @Path("services/{serviceId}")
+    public Response getPostsByServiceId(@PathParam("serviceId") Long serviceId) {
+        List<PostTO> posts = postFacade.getPostsByServiceId(serviceId);
+        return RestResponse.ok(new GenericEntity<List<PostTO>>(posts){});
+    }
+
     @POST
     public Response createPost(PostTO post) throws FacadeException {
         Post created = postFacade.createPost(post);

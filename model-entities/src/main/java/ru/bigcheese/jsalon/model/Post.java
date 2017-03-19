@@ -15,12 +15,15 @@ import static ru.bigcheese.jsalon.core.StringUtils.stripToNull;
 @NamedQueries({
         @NamedQuery(name = Post.EXISTS_BY_NAME,
                 query = "select p.name from Post p where p.name = :name"),
+        @NamedQuery(name = Post.GET_BY_IDS,
+                query = "select p from Post p where p.id in :ids"),
         @NamedQuery(name = Post.DELETE_BY_IDS,
                 query = "delete from Post p where p.id in :ids")
 })
 public class Post extends BaseModel {
 
     public static final String EXISTS_BY_NAME = "Post.existsByName";
+    public static final String GET_BY_IDS = "Post.getByIds";
     public static final String DELETE_BY_IDS = "Post.deleteByIds";
 
     private String name;
@@ -59,10 +62,7 @@ public class Post extends BaseModel {
         this.description = description;
     }
 
-    @ManyToMany
-    @JoinTable(name = "post_service",
-            joinColumns = @JoinColumn(name = "post_id", referencedColumnName="id"),
-            inverseJoinColumns = @JoinColumn(name = "service_id", referencedColumnName="id"))
+    @ManyToMany(mappedBy = "posts")
     public Set<Service> getServices() {
         return services;
     }
@@ -73,9 +73,7 @@ public class Post extends BaseModel {
 
     public void addService(Service service) {
         services.add(service);
-        if (!service.getPosts().contains(this)) {
-            service.getPosts().add(this);
-        }
+        service.getPosts().add(this);
     }
 
     public void update(PostTO postTO) {

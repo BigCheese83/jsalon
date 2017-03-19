@@ -44,15 +44,31 @@
                         defaultContent: "<button class='ui-button ui-corner-all show-btn'>Показать</button>" },
                     { targets: [ 3 ], data: "description", defaultContent: "" }
                 ]
+            },
+            services: {
+                ajax: {
+                    url: "/jsalon/rest/services",
+                    dataSrc: ""
+                },
+                columnDefs: [
+                    { targets: [ 0, 1, 2, 3, 4, 5 ], className: "dt-center" },
+                    { targets: [ 0 ], data: "id", width: "15px", searchable: false },
+                    { targets: [ 1 ], data: "category" },
+                    { targets: [ 2 ], data: "name" },
+                    { targets: [ 3 ], data: "cost" },
+                    { targets: [ 4 ], data: "duration" },
+                    { targets: [ 5 ], data: null, width: "90px", searchable: false, orderable: false,
+                        defaultContent: "<button class='ui-button ui-corner-all show-btn'>Показать</button>" },
+                    { targets: [ 6 ], data: "description", defaultContent: "" }
+                ]
             }
-        },
-        formValidator: {
-            discounts: validateDiscountForm
         },
         formMapper: {
             discounts: fillDiscountForm,
-            posts: fillPostForm
-        }
+            posts: fillPostForm,
+            services: fillServiceForm
+        },
+        formValidator: {}
     };
 
     var $datatable = $( "#table" ).DataTable( options.datatable[ pageName ] );
@@ -71,6 +87,7 @@
     $dialog.dialog({
         autoOpen: false,
         modal: true,
+        width: "auto",
         resizable: false,
         buttons: {
             "OK": function() {
@@ -196,15 +213,6 @@
         return func ? func() : true;
     }
 
-    function validateDiscountForm() {
-        var value = $( "#value" ).val();
-        if ( value < 1 || value > 100 ) {
-            error( $errDialog, "Значение скидки должно быть числом в диапазоне 1..100" );
-            return false;
-        }
-        return true;
-    }
-
     function fillDiscountForm( data ) {
         $( "#name" ).val( data.name );
         $( "#value" ).val( data.value );
@@ -216,10 +224,18 @@
         $( "#description" ).val( data.description );
     }
 
+    function fillServiceForm( data ) {
+        $( "#category" ).val( data.category );
+        $( "#name" ).val( data.name );
+        $( "#cost" ).val( data.cost );
+        $( "#duration" ).val( data.duration );
+        $( "#description" ).val( data.description );
+    }
+
     function getLastPathFromUrl() {
         var url = location.pathname;
-        var i = url.lastIndexOf("/");
-        return url.slice(++i - url.length);
+        var i = url.lastIndexOf( "/" );
+        return url.slice( ++i - url.length );
     }
 
 })( jQuery );

@@ -17,7 +17,6 @@
     </thead>
 </table>
 <div id="dialog">
-    <div id="dialogErrors" class="err-container"></div>
     <form id="dialog-form">
         <fieldset>
             <label for="name">Наименование</label>
@@ -35,7 +34,7 @@
         <span id="confirm-msg"></span>
     </p>
 </div>
-<div id="showDialog" style="display: none">
+<div id="showDialog">
     <div class="loading center">
         <i class="fa fa-spinner fa-pulse fa-4x fa-fw"></i><span class="sr-only">Загрузка...</span>
     </div>

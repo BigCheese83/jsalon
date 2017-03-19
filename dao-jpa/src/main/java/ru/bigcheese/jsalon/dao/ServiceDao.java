@@ -9,6 +9,7 @@ import java.util.Set;
 @Local
 public interface ServiceDao extends BaseDao<Service> {
     boolean existsByName(String name);
+    void deleteServices(Set<Long> ids);
     List<Service> getServicesByIds(Set<Long> ids);
     List<Service> getServicesByPostId(Long postId);
 }

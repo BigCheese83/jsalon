@@ -11,6 +11,7 @@ import java.util.Set;
 @Local
 public interface PostFacade {
     List<PostTO> findAll();
+    List<PostTO> getPostsByServiceId(Long serviceId);
     Post createPost(PostTO post) throws FacadeException;
     Post updatePost(PostTO post) throws FacadeException;
     void deletePost(Long id);

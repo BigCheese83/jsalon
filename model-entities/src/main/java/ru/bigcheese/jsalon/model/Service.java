@@ -1,10 +1,17 @@
 package ru.bigcheese.jsalon.model;
 
+import ru.bigcheese.jsalon.model.to.ServiceTO;
+
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import static ru.bigcheese.jsalon.core.StringUtils.stripToNull;
 
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = {"category", "name"}) })
@@ -12,12 +19,15 @@ import java.util.Set;
         @NamedQuery(name = Service.EXISTS_BY_NAME,
                 query = "select s.name from Service s where s.name = :name"),
         @NamedQuery(name = Service.GET_BY_IDS,
-                query = "select s from Service s where s.id in :ids")
+                query = "select s from Service s where s.id in :ids"),
+        @NamedQuery(name = Service.DELETE_BY_IDS,
+                query = "delete from Service s where s.id in :ids")
 })
 public class Service extends BaseModel {
 
     public static final String EXISTS_BY_NAME = "Service.existsByName";
     public static final String GET_BY_IDS = "Service.getByIds";
+    public static final String DELETE_BY_IDS = "Service.deleteByIds";
 
     private String category;
     private String name;
@@ -25,6 +35,13 @@ public class Service extends BaseModel {
     private Integer duration;
     private String description;
     private Set<Post> posts = new HashSet<>();
+
+    public Service() {}
+
+    public Service(ServiceTO serviceTO) {
+        setId(serviceTO.getId());
+        update(serviceTO);
+    }
 
     @Id
     @SequenceGenerator(name = "serviceSeq", sequenceName = "service_id_seq", allocationSize = 1)
@@ -34,6 +51,7 @@ public class Service extends BaseModel {
     }
 
     @Column(nullable = false)
+    @NotNull(message = "Category must be set.")
     public String getCategory() {
         return category;
     }
@@ -43,6 +61,7 @@ public class Service extends BaseModel {
     }
 
     @Column(nullable = false)
+    @NotNull(message = "Name must be set.")
     public String getName() {
         return name;
     }
@@ -52,6 +71,8 @@ public class Service extends BaseModel {
     }
 
     @Column(nullable = false)
+    @NotNull(message = "Cost must be set.")
+    @DecimalMin(value = "0.01", message = "Cost must be greater than zero.")
     public BigDecimal getCost() {
         return cost;
     }
@@ -61,6 +82,8 @@ public class Service extends BaseModel {
     }
 
     @Column(nullable = false)
+    @NotNull(message = "Duration must be set.")
+    @Min(value = 1, message = "Duration must be greater than zero.")
     public Integer getDuration() {
         return duration;
     }
@@ -77,7 +100,10 @@ public class Service extends BaseModel {
         this.description = description;
     }
 
-    @ManyToMany(mappedBy = "services")
+    @ManyToMany
+    @JoinTable(name = "post_service",
+            joinColumns = @JoinColumn(name = "service_id", referencedColumnName="id"),
+            inverseJoinColumns = @JoinColumn(name = "post_id", referencedColumnName="id"))
     public Set<Post> getPosts() {
         return posts;
     }
@@ -88,9 +114,15 @@ public class Service extends BaseModel {
 
     public void addPost(Post post) {
         posts.add(post);
-        if (!post.getServices().contains(this)) {
-            post.getServices().add(this);
-        }
+        post.getServices().add(this);
+    }
+
+    public void update(ServiceTO serviceTO) {
+        category = stripToNull(serviceTO.getCategory());
+        name = stripToNull(serviceTO.getName());
+        cost = serviceTO.getCost();
+        duration = serviceTO.getDuration();
+        description = stripToNull(serviceTO.getDescription());
     }
 
     @Override

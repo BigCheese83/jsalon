@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/datatables.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/select2.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jsalon.css">
 </head>
 <body class="ui-widget">
@@ -52,6 +53,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/datatables.js"></script>
+<script src="${pageContext.request.contextPath}/js/select2.js"></script>
 <script src="${pageContext.request.contextPath}/js/jsalon.js"></script>
 <c:if test="${not empty param.script}">
     <jsp:include page="/WEB-INF/pages/${param.script}.jsp"/>
